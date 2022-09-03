@@ -1,0 +1,505 @@
+@font-face
+{
+	font-family:text;
+	src:url('../fonts/light.woff2');
+}
+@font-face
+{
+	font-family:title;
+	src:url('../fonts/bold.woff2');
+}
+body
+{
+	display:flex;
+	flex-direction:column;
+	position:fixed;
+	top:0;
+	bottom:0;
+	height:100vh;
+	inset-inline:0;
+	color:#444;
+	padding:10px;
+	font:14px text;
+	background:#fff;
+	margin:0;
+}
+.pagetitle , .formtitle
+{
+	text-align:center;
+	font:25px/50px title;
+	padding-bottom:10px;
+	text-transform:capitalize;
+	border-bottom:solid 1px #eee;
+	margin-bottom:10px;
+}
+.exitbutton , .applybutton
+{
+	position:fixed;
+	top:10px;
+	inset-inline-start:10px;
+}
+.exitbutton , .applybutton , .formbutton
+{
+	cursor:pointer;
+	width:120px;
+	height:50px;
+	font:20px title;
+	color:inherit;
+	text-transform:capitalize;
+	background:#ccc;
+	border:0;
+	border-radius:5px;
+	box-sizing:border-box;
+	margin:0;
+}
+.exitbutton:hover , .applybutton:hover , .tableleft:hover , .tableright:hover , .tablebutton:hover , .tablebutton:hover > .tableicon , .formbutton:hover
+{
+	color:#fff !important;
+	background:#336699 !important;
+	border-color:#336699 !important;
+}
+.applybutton
+{
+	inset-inline-start:auto;
+	inset-inline-end:10px;
+}
+.tablesearch , .tablefield , .tablebox
+{
+	appearance:none;
+	width:calc(100% - 140px);
+	max-width:300px;
+	height:50px;
+	color:inherit;
+	padding:0 10px;
+	font:14px/40px text;
+	background:#0000;
+	border:solid 1px #ccc;
+	border-radius:5px;
+	box-sizing:border-box;
+	margin:0;
+	outline:none;
+}
+.tablefilter
+{
+	appearance:none;
+	vertical-align:top;
+	width:130px;
+	height:50px;
+	padding:10px;
+	font:14px text;
+	padding-inline-end:35px;
+	text-transform:capitalize;
+	background:url(../images/arrow.svg) #0000 no-repeat calc(100% - 10px) center/12px;
+	border-radius:5px;
+	border:solid 1px #ccc;
+	margin-inline-start:10px;
+	outline:none;	
+}
+.tablepager
+{
+	display:flex;
+	position:fixed;
+	top:80px;
+	inset-inline-end:10px;
+	width:250px;
+	gap:10px;
+	align-items:center;
+	justify-content:space-between;
+	font-size:30px;
+}
+.tableleft , .tableright
+{
+	cursor:pointer;
+	flex-grow:0;
+	width:50px;
+	height:50px;
+	color:#444;
+	padding:10px;
+	fill:currentColor;
+	background:#ccc;
+	border-radius:5px;
+	box-sizing:border-box;
+}
+.tablehead , .tablerow , .tableinsert
+{
+	display:grid;
+	gap:1px;
+	overflow:hidden;
+	align-items:center;
+	grid-auto-flow:column;
+	grid-auto-columns:minmax(0 , 1fr);
+	border-top:solid 1px #eee;
+	border-radius:5px;
+	margin:10px 0 5px;
+}
+.tablename
+{
+	color:inherit;
+	overflow:hidden;
+	text-align:center;
+	white-space:nowrap;
+	font:20px/50px title;
+	padding:10px 10px 0;
+	text-overflow:ellipsis;
+	text-transform:capitalize;
+	background:#fff;
+	box-sizing:border-box;
+}
+.tablebody , .formbody
+{
+	flex:10;
+	overflow-y:scroll;
+	scrollbar-width:none;
+	-ms-overflow-style:none;
+}
+.tablebody::-webkit-scrollbar , .formbody::-webkit-scrollbar
+{
+	display:none;
+}
+.tablecontent
+{
+	width:100%;
+	display:flex;
+	gap:5px;
+	flex-direction:column;
+	justify-content:space-between;
+}
+.tablerow
+{
+	display:none;
+	background:#ccc;
+	border-bottom:solid 1px #ccc;
+	margin:0;
+}
+.tablelabel
+{
+	position:relative;
+	display:grid;
+	height:60px;
+	grid-auto-flow:column;
+	justify-content:space-between;
+	font:14px/60px text;
+	padding:1px 15px;
+	background:#eee;
+}
+.tablelabel > .tableform
+{
+	display:none;
+	position:absolute;
+	top:0;
+	bottom:0;
+	inset-inline-start:40px;
+	inset-inline-end:0;
+}
+.tablelabel > .tableform > .tablefield
+{
+	cursor:auto;
+	background-color:#fff;
+	border-color:#ccc;
+}
+.tablelabel:hover .tableaction
+{
+	display:block;
+}
+.tablebadge
+{
+	position:absolute;
+	top:0;
+	bottom:0;
+	inset-inline-start:0;
+	width:40px;
+	text-align:center;
+	background:#ccc;
+}
+.tabletoggle , .tabletext
+{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	margin-inline-start:40px;
+}
+.tabletoggle:hover , .tablefield:hover , .tablefield:focus , .tablebox:hover
+{
+	cursor:pointer;
+	color:#000;
+	font-size:15px;
+}
+.tableaction
+{
+	display:none;
+}
+.tableicon
+{
+	display:inline-block;
+	vertical-align:middle;
+	cursor:pointer;
+	width:15px;
+	height:15px;
+	color:#444;
+	fill:currentColor;
+	margin-inline-start:10px;
+}
+.tableicon:hover
+{
+	color:#336699;
+}
+.tabletext
+{
+	margin-inline:0;
+}
+.tableform
+{
+	position:relative;
+	height:42px;
+	padding:10px;
+	margin:0;
+	background:#eee;
+}
+.tablefield , .tablebox
+{
+	width:100%;
+	height:40px;
+	max-width:none;
+	border-color:#0000;
+}
+.tablefield:focus , .tablebox:focus
+{
+	background-color:#fff;
+	border-color:#ccc;
+}
+.tablefield::placeholder , .formfield::placeholder
+{
+	opacity:1;
+	color:#aaa;
+}
+.tablefield::-webkit-calendar-picker-indicator
+{
+	background:url(../images/date.svg) #0000 no-repeat center/contain;
+}
+.tablebutton
+{
+	cursor:pointer;
+	position:absolute;
+	top:15px;
+	bottom:17px;
+	inset-inline-end:15px;
+	color:inherit;
+	padding:0 10px;
+	background:#ccc;
+	border-radius:5px;
+	border:0;
+	margin:0;
+}
+.tablebutton > .tableicon
+{
+	width:10px;
+	height:10px;
+	margin:0;
+}
+.tablebox
+{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	padding-inline-end:35px;
+	background:url(../images/arrow.svg) #0000 no-repeat calc(100% - 11px) center/17px;
+}
+.tablebox:invalid , .tablebox:disabled
+{
+	color:#aaa !important;
+}
+.tablenone
+{
+	display:none;
+	color:#ccc;
+	text-align:center;
+	font:30px/30vh title;
+}
+.tableinsert
+{
+	gap:5px;
+	border:0;
+	margin-bottom:20px;
+}
+.tableinsert > .tablefield , .tableinsert > .tablebox
+{
+	height:50px;
+	border-color:#ccc;
+}
+.tableinsert > .tablebutton
+{
+	cursor:pointer;
+	position:static;
+	max-width:100px;
+	height:50px;
+	font:20px title;
+}
+.tableinsert > .tablebutton:first-of-type
+{
+	display:none;
+}
+.formoverlay , .loaderoverlay
+{
+	display:none;
+	position:fixed;
+	top:0;
+	inset-inline:0;
+	bottom:0;
+	opacity:0;
+	padding:10px;
+	align-items:flex-start;
+	justify-content:center;
+	background:rgba(0,0,0,.9);
+	transition:opacity .2s linear;
+	will-change:opacity;
+}
+.formcontainer
+{
+	display:flex;
+	flex-direction:column;
+	gap:10px;
+	width:100%;
+	max-width:500px;
+	max-height:80%;
+	padding:10px;
+	background:#fff;
+	border-radius:5px;
+	box-sizing:border-box;
+}
+.formtitle
+{
+	padding:0;
+	border:0;
+	line-height:30px;
+	margin:0;
+}
+.formerror
+{
+	color:inherit;
+	padding:10px;
+	background:rgba(255,0,0,.25);
+	border:solid 1px #ff0000;
+	border-radius:5px;
+}
+.formcontent
+{
+	display:flex;
+	flex-direction:column;
+	gap:10px;
+}
+.formitem
+{
+	display:inline-flex;
+	width:100%;
+	height:50px;
+	overflow:hidden;
+	border:solid 1px #ccc;
+	border-radius:5px;
+	box-sizing:border-box;
+	margin:0;
+}
+.formicon
+{
+	width:40px;
+	color:inherit;
+	padding:10px;
+	fill:currentColor;
+	background:#ccc;
+	box-sizing:border-box;
+}
+.formfield
+{
+	width:calc(100% - 40px);
+	padding:10px;
+	color:#000;
+	font:14px text;
+	background:#fff;
+	box-sizing:border-box;
+	border:0;
+	margin:0;
+	outline:0;
+}
+.formarea
+{
+	height:60px !important;
+	resize:none;
+}
+.formaction
+{
+	display:flex;
+	gap:10px;
+}
+.formbutton
+{
+	flex-grow:1;
+	width:auto;
+}
+.formchecks
+{
+	display:grid;
+	grid-template-columns:repeat(2 , 1fr);
+	gap:10px;
+}
+.formcheck
+{
+	appearance:none;
+	display:inline-block;
+	vertical-align:middle;
+	width:25px;
+	height:25px;
+	border:solid 1px #ccc;
+	border-radius:5px;
+	margin:0;
+	margin-inline-end:5px;
+}
+.formcheck:checked
+{
+	background:url(../images/sumbit.svg) #fff no-repeat center/70%;
+}
+.formcomment
+{
+	display:inline-block;
+	width:100%;
+	padding:10px;
+	background:#eee;
+	border-radius:5px;
+	box-sizing:border-box;
+	margin-top:10px;
+}
+.loaderoverlay
+{
+	align-items:center;
+}
+.loadericon
+{
+	width:100px;
+	height:100px;
+	color:#fff;
+	fill:currentColor;
+	animation:loading 1s linear infinite;
+}
+@media(max-width:768px)
+{
+	body { font-size:12px; }
+	.pagetitle , .exitbutton , .applybutton , .tablename , .tableinsert > .tablebutton , .formbutton { font-size:14px; }
+	.pagetitle , .tablelabel { line-height:40px; }
+	.exitbutton , .applybutton , .tableleft, .tableright { width:80px; height:40px; }
+	.tablesearch , .tablefilter , .tablelabel , .tablebox , .tableinsert > .tablebutton , .tableinsert > .tablefield , .tableinsert > .tablebox , .formitem , .formbutton { height:40px; }
+	.tablesearch , .tableinsert > .tablebutton { max-width:none; }
+	.tablepager { position:static; width:auto; margin:10px auto; }
+	.tableleft , .tableright { width:40px; }
+	.tablehead { display:flex; justify-content:space-between; }
+	.tablename { line-height:25px; padding:10px 0 0; }
+	.tablerow , .tableinsert { grid-auto-flow:row; }
+	.tableaction { display:block; }
+	.tableicon { width:20px; height:20px; margin-inline-start:20px; }
+	.tableform  { height:32px; padding:5px; }
+	.tableform > .tablebutton { top:5px; bottom:5px; inset-inline-end:5px; padding:0 10px; border-start-start-radius:0; border-end-start-radius:0; }
+	.tablefield , .tablebox { height:32px; line-height:32px; }
+	.tableinsert { height:40px; transition:height .2s linear; }
+	.tableinsert > .tablebutton { display:block !important; }
+}
+@keyframes loading
+{
+	0% { transform:rotateZ(0); }
+	100% { transform:rotateZ(360deg); }
+}
