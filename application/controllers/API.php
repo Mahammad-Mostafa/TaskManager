@@ -59,7 +59,7 @@ class API extends CI_Controller
 					$values = $this->db->query("SELECT $select FROM $table Where id <> " . $_SESSION['userid'] . " GROUP BY name ORDER BY events DESC")->result_array();
 					$actions = ["editing" , "deleting"];
 					$filters = array_merge([["id" => "0" , "name" => "all"]] , $this->query("id , name" , "levels" , "" , "id ASC"));
-					$forms = ["name" , "email" , "password" , "levelid"];
+					$forms = ["name" , "email" , "levelid"];
 					$boxes = ["levelid" => $this->select("levelid")];
 					}
 				else
@@ -134,11 +134,11 @@ class API extends CI_Controller
 			}
 		if($action == "insert" AND $table == "users")
 			{
-			$fields = ["name" , "email" , "password" , "levelid"];
+			$fields = ["name" , "email" , "levelid"];
 			}
 		else if($action == "insert" AND $table == "tasks")
 			{
-			$fields = ["userid" , "stateid" , "name" , "assign" , "due"];
+			$fields = ["stateid" , "name" , "assign" , "due"];
 			}
 		else if($action == "account")
 			{
@@ -282,18 +282,23 @@ class API extends CI_Controller
 					$this->db->insert($table , ["taskid" => $record , "userid" => $_SESSION['userid'] , "comment" => $values['comment']]);
 					$this->events($record);
 					}
+				else if($table == "users")
+					{
+					$values['password'] = mt_rand(999 , 9999);
+					$this->db->insert($table , $values);
+					$userid = $this->query("id" , "users" , "name = '" . $values['name'] . "' AND email = '" . $values['email'] . "'" , "")[0]['id'];
+					$this->db->insert("reviewers" , ["userid" => $userid , "reviewerid" => $userid]);
+					}
+				else if($table == "tasks")
+					{
+					$values['userid'] = $record;
+					unset($record);
+					$this->db->insert($table , $values);
+					$this->events($this->query("id" , "tasks" , $values , "")[0]['id']);
+					}
 				else
 					{
 					$this->db->insert($table , $values);
-					if($table == "users")
-						{
-						$userid = $this->query("id" , "users" , "name = '" . $values['name'] . "' AND email = '" . $values['email'] . "'" , "")[0]['id'];
-						$this->db->insert("reviewers" , ["userid" => $userid , "reviewerid" => $userid]);
-						}
-					else if($table == "tasks")
-						{
-						$this->events($this->query("id" , "tasks" , $values , "")[0]['id']);
-						}
 					}
 				if(in_array($table , ["tasks" , "users"] , TRUE))
 					{
