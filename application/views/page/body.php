@@ -69,12 +69,11 @@
 <form id="inserts" class="tableinsert" method="post" onsubmit="return postform(this);">
 	<input class="tablebutton" type="reset" value="Insert" onclick="toggleinsert(this);"/>
 	<input type="hidden" name="table"/>
-	<input type="hidden" name="userid"/>
+	<input type="hidden" name="record" value="1"/>
 	<input type="hidden" name="stateid" value="1"/>
 	<input type="hidden" name="action" value="insert"/>
 	<input class="tablefield" type="text" name="name" placeholder="enter name"/>
 	<input class="tablefield" type="email" name="email" placeholder="enter email"/>
-	<input class="tablefield" type="password" name="password" placeholder="enter password"/>
 	<input class="tablefield" type="date" name="assign"/>
 	<input class="tablefield" type="date" name="due"/>
 	<select class="tablebox" name="levelid"></select>

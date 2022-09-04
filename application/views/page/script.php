@@ -336,10 +336,15 @@
 		let elements = null;
 		if(title.length == 0)
 			{
+			insertelements.reset();
 			insertelements.table.value = tablename;
 			if(tablename == "tasks")
 				{
-				insertelements.userid.value = tablerecord;
+				insertelements.record.value = tablerecord;
+				}
+			else
+				{
+				insertelements.record.value = 1;
 				}
 			elements = insertelements;
 			}
@@ -432,9 +437,13 @@
 					{
 					loadtable(true);
 					}
-				if(form.action.value == "insert" && insertelements.hasAttribute("style"))
+				if(form.action.value == "insert")
 					{
-					toggleinsert(insertelements.firstElementChild);
+					form.reset();
+					if(insertelements.hasAttribute("style"))
+						{
+						toggleinsert(insertelements.firstElementChild);
+						}
 					}
 				}
 			else
